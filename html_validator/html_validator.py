@@ -59,13 +59,13 @@ class ValidationError:
         # 16
         # from:
         # "file:/C:/projects/test.html":16.5-16.9: error: Unclosed element "div".
-        self.line = int(err_wo_filename.split('.')[0].strip())
+        self.line = 123 # int(err_wo_filename.split('.')[0].strip())
 
         # get error type, eg:
         # error
         # from:
         # "file:/C:/projects/test.html":16.5-16.9: error: Unclosed element "div".
-        self.type = err_wo_filename.split(':')[1].strip()
+        self.type = 'jaba' # err_wo_filename.split(':')[1].strip()
 
         # get description, eg:
         # Unclosed element "div".
@@ -122,19 +122,19 @@ def validate(files, verbose=False):
             raise MissingHtmlFile("Missing HTML file to test: " + filename)
 
     # build the command to execute
-    cmd = ["java", "-Xss512k", "-jar", '%s' % vnu_path] + files
+    cmd = ["java", "-Xss1024k", "-jar", '%s' % vnu_path] + files
     if verbose:
         print("Execute command:", " ".join(cmd))
 
     # run the command to perform the validation
     try:
         # execute and get output
-        output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+        output = subprocess.Popen(" ".join(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
         if verbose:
             print("Command output:", str(output)[:256] + "...")
 
         # get just the errors part of the output
-        errs = output[1]
+        errs = output[1].decode()
 
     # not found on windows
     except WindowsError:

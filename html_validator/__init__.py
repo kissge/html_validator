@@ -7,6 +7,4 @@ __version__ = '1.0.1'
 __author__ = 'Ronen Ness'
 __license__ = 'MIT'
 
-from html_validator import validate, MissingValidatorOrJava, MissingHtmlFile, ValidationError
-
-
+from .html_validator import validate, MissingValidatorOrJava, MissingHtmlFile, ValidationError
